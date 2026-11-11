@@ -100,7 +100,7 @@ class Hibira_LC_Widget {
 	 * @param array|string $atts Shortcode attributes.
 	 */
 	public static function shortcode( $atts ) {
-		$atts = shortcode_atts(
+		$atts  = shortcode_atts(
 			array(
 				'label' => __( 'Chat with us', 'hibira-live-chat' ),
 				'topic' => '',

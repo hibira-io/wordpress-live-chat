@@ -155,7 +155,7 @@ class Hibira_LC_Admin {
 	/** The notice for ?hibira_lc=…: text and whether it is good news. */
 	private static function notice() {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- only picks which message to show.
-		$n = isset( $_GET['hibira_lc'] ) ? sanitize_key( wp_unslash( $_GET['hibira_lc'] ) ) : '';
+		$n   = isset( $_GET['hibira_lc'] ) ? sanitize_key( wp_unslash( $_GET['hibira_lc'] ) ) : '';
 		$all = array(
 			'connected'       => array( __( 'Connected. The chat now shows on your site.', 'hibira-live-chat' ), true ),
 			'saved_workspace' => array( __( 'Workspace saved. Make sure your site is in the workspace\'s sites (Settings › Widget on chat.hibira.io), or the chat will not show.', 'hibira-live-chat' ), true ),
