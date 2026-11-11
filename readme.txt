@@ -62,13 +62,6 @@ Yes. The script tag is the same for every visitor unless you use an identity sec
 
 Add the shortcode `[hibira_live_chat label="Chat with us"]`, or `[hibira_live_chat label="Talk to sales" topic="sales"]` to mark the conversation as a sales question. A menu item or any link to `#hibira-live-chat` opens it too. Untick Chat button to hide the round button and use only your own.
 
-== Screenshots ==
-
-1. The chat on a site.
-2. Live Chat in wp-admin, connected.
-3. One-click connect on chat.hibira.io.
-4. The inbox on chat.hibira.io.
-
 == Changelog ==
 
 = 0.1.0 =
