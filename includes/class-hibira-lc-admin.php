@@ -181,6 +181,8 @@ class Hibira_LC_Admin {
 		echo '<div class="wrap hibira-lc">';
 		echo '<h1 class="hibira-lc-title"><img src="' . esc_url( HIBIRA_LC_URL . 'assets/images/live-chat-icon.png' ) . '" width="32" height="32" alt=""> ' . esc_html__( 'Hibira Live Chat', 'hibira-live-chat' ) . '</h1>';
 		echo '<p class="hibira-lc-lead">' . esc_html__( 'A chat bubble on every page of your site. Answer from the Hibira inbox; AI can answer common questions from your help articles, and messages are translated both ways.', 'hibira-live-chat' ) . '</p>';
+		// A top-level page does not print the Settings API's notices by itself.
+		settings_errors();
 		if ( $notice ) {
 			echo '<div class="notice ' . ( $notice[1] ? 'notice-success' : 'notice-error' ) . ' is-dismissible"><p>' . esc_html( $notice[0] ) . '</p></div>';
 		}

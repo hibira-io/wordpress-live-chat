@@ -62,6 +62,15 @@ Yes. The script tag is the same for every visitor unless you use an identity sec
 
 Add the shortcode `[hibira_live_chat label="Chat with us"]`, or `[hibira_live_chat label="Talk to sales" topic="sales"]` to mark the conversation as a sales question. A menu item or any link to `#hibira-live-chat` opens it too. Untick Chat button to hide the round button and use only your own.
 
+== Screenshots ==
+
+1. The chat on your site, opened from a "Chat with us" button and answered in the visitor's language.
+2. One click to connect: sign in with Hibira from the Live Chat page.
+3. Approve the site on chat.hibira.io, and you are sent back connected.
+4. Settings: chat button, hide from your team, colour, language and verified customers.
+5. Every conversation lands in the shared Hibira inbox.
+6. Signed-in customers are verified, on phones and in dark mode too.
+
 == Changelog ==
 
 = 0.1.0 =
