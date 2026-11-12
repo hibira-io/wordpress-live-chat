@@ -1,0 +1,27 @@
+# Attaches hibira-live-chat.zip to each published GitHub Release, ready for
+# Plugins → Add New → Upload Plugin and the WordPress.org submission. It
+# unpacks to hibira-live-chat/ whatever the version. The tag must be
+# v<Version from hibira-live-chat.php>, e.g. v0.1.0.
+name: release
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  zip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tag matches the plugin version
+        run: |
+          version="$(sed -n 's/^ \* Version: *//p' hibira-live-chat.php)"
+          stable="$(sed -n 's/^Stable tag: *//p' readme.txt)"
+          [ "$version" = "$stable" ] || { echo "plugin $version != readme Stable tag $stable"; exit 1; }
+          [ "v$version" = "$GITHUB_REF_NAME" ] || { echo "tag $GITHUB_REF_NAME != v$version"; exit 1; }
+      - run: git archive --format=zip --prefix=hibira-live-chat/ -o hibira-live-chat.zip HEAD
+      - run: gh release upload "$GITHUB_REF_NAME" hibira-live-chat.zip --clobber
+        env:
+          GH_TOKEN: ${{ github.token }}
