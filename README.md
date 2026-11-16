@@ -13,7 +13,7 @@ This is a separate plugin from [Hibira Realtime](https://github.com/hibira-io/wo
 
 ```
 wp-admin › Live Chat › Sign in with Hibira
-  ──► https://chat.hibira.io/portal/connect?site=<home origin>&return_to=<this page>&state=<random>&platform=wordpress
+  ──► https://hibira.io/portal/live-chat/connect?site=<home origin>&return_to=<this page>&state=<random>&platform=wordpress
   ──► sign in, Connect: the site is added to the workspace's sites (plan limits apply)
   ──► back to wp-admin with ?hibira_workspace=ws_…&state=… (state checked against a per-user transient)
 every page ──► <script src="https://chat.hibira.io/w/v1.js" data-workspace="ws_…" async>
@@ -31,7 +31,7 @@ every page ──► <script src="https://chat.hibira.io/w/v1.js" data-workspace
 
 Sites that are not on https (other than localhost), or whose admin is on
 another origin than the site, paste the workspace ID instead and add the
-site in Settings › Widget on chat.hibira.io.
+site in Settings › Widget in Hibira Live Chat.
 
 wp-config.php: `HIBIRA_LIVECHAT_WORKSPACE`, `HIBIRA_LIVECHAT_IDENTITY_SECRET`.
 Filters: `hibira_lc_show` (show on this page), `hibira_lc_attributes`
@@ -60,7 +60,7 @@ WordPress.org over SVN (secret `SVN_PASSWORD`, once the plugin is approved).
 ## 中文摘要
 
 WordPress 的 Hibira Live Chat 外掛，給網站與商店老闆用：在後台「Live Chat」按「Sign in with Hibira」，
-在 chat.hibira.io 登入並按「連接」，網站會自動加入工作區的網站清單並回到後台，對話泡泡就出現在每一頁，
+在 Hibira Live Chat（hibira.io）登入並按「連接」，網站會自動加入工作區的網站清單並回到後台，對話泡泡就出現在每一頁，
 不用複製任何程式碼。沒有 https 的網站可以改貼工作區 ID。可設定是否顯示、右下角圓形按鈕、對已登入的編輯/管理員隱藏、
 顏色、跟隨網站語言或訪客瀏覽器語言；填入身分密鑰（lcid_…）後，已登入的會員會以驗證身分出現在收件匣（Starter 方案以上）。
 短代碼 `[hibira_live_chat]` 與連到 `#hibira-live-chat` 的選單項目都能打開對話。這是獨立外掛，與 Hibira Realtime 外掛分開。
