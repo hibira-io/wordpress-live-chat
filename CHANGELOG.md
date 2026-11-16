@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1
+
+- The inbox, settings and connect links open Hibira Live Chat's pages on hibira.io (hibira.io/portal/live-chat). The chat script still loads from chat.hibira.io.
+
 ## 0.1.0
 
 - First release: connect the site to a Hibira Live Chat workspace in one click (Sign in with Hibira) or with the workspace ID, and show the chat on every page.

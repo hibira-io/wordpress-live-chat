@@ -22,7 +22,9 @@ check( 'no connect across origins', ! Hibira_LC::can_connect( 'https://shop.exam
 
 $u = Hibira_LC::connect_url( 'https://shop.example/', 'https://shop.example/wp-admin/admin.php?page=hibira-live-chat', 'abcdefgh12345678' );
 parse_str( (string) parse_url( $u, PHP_URL_QUERY ), $q );
-check( 'connect url', 0 === strpos( $u, 'https://chat.hibira.io/portal/connect?' ) && 'https://shop.example' === $q['site'] && 'https://shop.example/wp-admin/admin.php?page=hibira-live-chat' === $q['return_to'] && 'abcdefgh12345678' === $q['state'] && 'wordpress' === $q['platform'] );
+check( 'connect url', 0 === strpos( $u, 'https://hibira.io/portal/live-chat/connect?' ) && 'https://shop.example' === $q['site'] && 'https://shop.example/wp-admin/admin.php?page=hibira-live-chat' === $q['return_to'] && 'abcdefgh12345678' === $q['state'] && 'wordpress' === $q['platform'] );
+
+check( 'dashboard pages', 'https://hibira.io/portal/live-chat/inbox' === Hibira_LC::page( '/inbox' ) && 'https://hibira.io/portal/live-chat/widget' === Hibira_LC::page( '/portal/widget' ) );
 
 // The same HMAC as pusher-server's identity check: hex(HMAC-SHA256(secret, user ID)).
 check( 'user hash', hash_hmac( 'sha256', '42', 'lcid_test' ) === Hibira_LC::user_hash( 'lcid_test', 42 ) && 64 === strlen( Hibira_LC::user_hash( 'lcid_test', '42' ) ) );

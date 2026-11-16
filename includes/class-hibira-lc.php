@@ -19,6 +19,23 @@ class Hibira_LC {
 		return rtrim( (string) $host, '/' );
 	}
 
+	/**
+	 * The address of a Live Chat dashboard page, given as its path on the
+	 * Live Chat host (/inbox, /portal/widget). Hibira's pages are on
+	 * hibira.io/portal/live-chat (/inbox there, /widget without the /portal
+	 * segment); another host (a test or local server) keeps its own paths.
+	 */
+	public static function page( $path ) {
+		$host = self::host();
+		if ( 'https://chat.hibira.io' !== $host ) {
+			return $host . $path;
+		}
+		if ( 0 === strpos( $path, '/portal/' ) ) {
+			$path = substr( $path, strlen( '/portal' ) );
+		}
+		return 'https://hibira.io/portal/live-chat' . $path;
+	}
+
 	/** An option of this plugin. */
 	public static function opt( $name, $fallback = '' ) {
 		return get_option( self::PREFIX . $name, $fallback );
@@ -76,7 +93,7 @@ class Hibira_LC {
 
 	/** The Live Chat page that adds the site to a workspace and comes back with its ID. */
 	public static function connect_url( $site, $back, $state ) {
-		return self::host() . '/portal/connect?' . http_build_query(
+		return self::page( '/portal/connect' ) . '?' . http_build_query(
 			array(
 				'site'      => self::origin_of( $site ),
 				'return_to' => $back,

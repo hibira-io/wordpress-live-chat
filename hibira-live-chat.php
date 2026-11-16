@@ -3,7 +3,7 @@
  * Plugin Name:       Hibira Live Chat
  * Plugin URI:        https://chat.hibira.io/?utm_source=wordpress&utm_medium=plugin&utm_campaign=live-chat
  * Description:       Talk to your visitors and customers from a chat bubble on every page, with AI answers from your own help articles, translation and a shared inbox on the web and on phones.
- * Version:           0.1.0
+ * Version:           0.1.1
  * Requires at least: 6.3
  * Requires PHP:      7.4
  * Author:            Hibira
@@ -17,7 +17,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'HIBIRA_LC_VERSION', '0.1.0' );
+define( 'HIBIRA_LC_VERSION', '0.1.1' );
 define( 'HIBIRA_LC_FILE', __FILE__ );
 define( 'HIBIRA_LC_DIR', plugin_dir_path( __FILE__ ) );
 define( 'HIBIRA_LC_URL', plugin_dir_url( __FILE__ ) );

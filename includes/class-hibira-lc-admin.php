@@ -1,7 +1,7 @@
 <?php
 /**
  * Live Chat in wp-admin: connect the site to a Hibira Live Chat workspace
- * (one click through chat.hibira.io, or by pasting the workspace ID), the
+ * (one click through Hibira Live Chat, or by pasting the workspace ID), the
  * widget's options here, and links to the inbox and the workspace settings.
  *
  * @package Hibira_Live_Chat
@@ -82,7 +82,7 @@ class Hibira_LC_Admin {
 		);
 	}
 
-	/** Sends the owner to chat.hibira.io to pick the workspace; they come back to connected(). */
+	/** Sends the owner to Hibira Live Chat to pick the workspace; they come back to connected(). */
 	public static function connect() {
 		if ( ! current_user_can( self::CAP ) ) {
 			wp_die( esc_html__( 'Sorry, you are not allowed to do that.', 'hibira-live-chat' ) );
@@ -94,12 +94,12 @@ class Hibira_LC_Admin {
 		}
 		$state = wp_generate_password( 32, false );
 		set_transient( 'hibira_lc_state_' . get_current_user_id(), $state, 30 * MINUTE_IN_SECONDS );
-		// phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect -- chat.hibira.io is another site by design.
+		// phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect -- Hibira Live Chat is another site by design.
 		wp_redirect( Hibira_LC::connect_url( home_url( '/' ), $back, $state ) );
 		exit;
 	}
 
-	/** Back from chat.hibira.io with ?hibira_workspace=…&state=… (or ?hibira_error=denied). */
+	/** Back from Hibira Live Chat with ?hibira_workspace=…&state=… (or ?hibira_error=denied). */
 	public static function connected() {
 		// phpcs:disable WordPress.Security.NonceVerification.Recommended -- the state stands in for the nonce: it was made for this user and is checked below.
 		if ( ! isset( $_GET['page'] ) || self::PAGE !== $_GET['page'] || ! isset( $_GET['state'] ) || ! current_user_can( self::CAP ) ) {
@@ -158,11 +158,11 @@ class Hibira_LC_Admin {
 		$n   = isset( $_GET['hibira_lc'] ) ? sanitize_key( wp_unslash( $_GET['hibira_lc'] ) ) : '';
 		$all = array(
 			'connected'       => array( __( 'Connected. The chat now shows on your site.', 'hibira-live-chat' ), true ),
-			'saved_workspace' => array( __( 'Workspace saved. Make sure your site is in the workspace\'s sites (Settings › Widget on chat.hibira.io), or the chat will not show.', 'hibira-live-chat' ), true ),
+			'saved_workspace' => array( __( 'Workspace saved. Make sure your site is in the workspace\'s sites (Settings › Widget in Hibira Live Chat), or the chat will not show.', 'hibira-live-chat' ), true ),
 			'disconnected'    => array( __( 'Disconnected. The chat no longer shows on your site.', 'hibira-live-chat' ), true ),
-			'denied'          => array( __( 'Not connected: the request was cancelled on chat.hibira.io.', 'hibira-live-chat' ), false ),
+			'denied'          => array( __( 'Not connected: the request was cancelled in Hibira Live Chat.', 'hibira-live-chat' ), false ),
 			'bad_state'       => array( __( 'That sign-in link has expired. Press Sign in with Hibira again.', 'hibira-live-chat' ), false ),
-			'bad_workspace'   => array( __( 'A workspace ID starts with ws_. Copy it from Settings › Widget on chat.hibira.io.', 'hibira-live-chat' ), false ),
+			'bad_workspace'   => array( __( 'A workspace ID starts with ws_. Copy it from Settings › Widget in Hibira Live Chat.', 'hibira-live-chat' ), false ),
 			'no_connect'      => array( __( 'One-click connect needs your site on https. Paste the workspace ID instead.', 'hibira-live-chat' ), false ),
 		);
 		return isset( $all[ $n ] ) ? $all[ $n ] : null;
@@ -193,10 +193,10 @@ class Hibira_LC_Admin {
 			/* translators: %s: the workspace ID, like ws_abc123 */
 			echo '<p class="hibira-lc-ok"><span class="dashicons dashicons-yes-alt" aria-hidden="true"></span> ' . sprintf( esc_html__( 'Connected to %s.', 'hibira-live-chat' ), '<code>' . esc_html( $ws ) . '</code>' ) . '</p>';
 			echo '<p class="hibira-lc-actions">';
-			echo '<a class="button button-primary" href="' . esc_url( $host . '/inbox' ) . '" target="_blank" rel="noopener">' . esc_html__( 'Open the inbox', 'hibira-live-chat' ) . '</a> ';
-			echo '<a class="button" href="' . esc_url( $host . '/portal/widget' ) . '" target="_blank" rel="noopener">' . esc_html__( 'Look and greeting', 'hibira-live-chat' ) . '</a> ';
-			echo '<a class="button" href="' . esc_url( $host . '/portal/knowledge' ) . '" target="_blank" rel="noopener">' . esc_html__( 'AI answers', 'hibira-live-chat' ) . '</a> ';
-			echo '<a class="button" href="' . esc_url( $host . '/portal/billing' ) . '" target="_blank" rel="noopener">' . esc_html__( 'Plan', 'hibira-live-chat' ) . '</a>';
+			echo '<a class="button button-primary" href="' . esc_url( Hibira_LC::page( '/inbox' ) ) . '" target="_blank" rel="noopener">' . esc_html__( 'Open the inbox', 'hibira-live-chat' ) . '</a> ';
+			echo '<a class="button" href="' . esc_url( Hibira_LC::page( '/portal/widget' ) ) . '" target="_blank" rel="noopener">' . esc_html__( 'Look and greeting', 'hibira-live-chat' ) . '</a> ';
+			echo '<a class="button" href="' . esc_url( Hibira_LC::page( '/portal/knowledge' ) ) . '" target="_blank" rel="noopener">' . esc_html__( 'AI answers', 'hibira-live-chat' ) . '</a> ';
+			echo '<a class="button" href="' . esc_url( Hibira_LC::page( '/portal/billing' ) ) . '" target="_blank" rel="noopener">' . esc_html__( 'Plan', 'hibira-live-chat' ) . '</a>';
 			echo '</p>';
 			if ( ! $fixed ) {
 				echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '">';
@@ -226,7 +226,7 @@ class Hibira_LC_Admin {
 			submit_button( __( 'Save', 'hibira-live-chat' ), 'secondary', 'submit', false );
 			echo '</p>';
 			/* translators: %s: the site address, like https://shop.example */
-			echo '<p class="description">' . sprintf( esc_html__( 'Find it in Settings › Widget on chat.hibira.io, and add %s to the sites there.', 'hibira-live-chat' ), '<code>' . esc_html( Hibira_LC::origin_of( home_url( '/' ) ) ) . '</code>' ) . '</p>';
+			echo '<p class="description">' . sprintf( esc_html__( 'Find it in Settings › Widget in Hibira Live Chat, and add %s to the sites there.', 'hibira-live-chat' ), '<code>' . esc_html( Hibira_LC::origin_of( home_url( '/' ) ) ) . '</code>' ) . '</p>';
 			echo '</form></details>';
 		}
 		echo '</div>';
@@ -255,7 +255,7 @@ class Hibira_LC_Admin {
 			$has = '' !== (string) Hibira_LC::opt( 'identity_secret' );
 			echo '<tr><th scope="row"><label for="hibira-lc-secret">' . esc_html__( 'Identity secret', 'hibira-live-chat' ) . '</label></th><td><input id="hibira-lc-secret" name="' . esc_attr( $p . 'identity_secret' ) . '" type="password" class="regular-text code" autocomplete="off" placeholder="' . esc_attr( $has ? __( 'Saved. Leave empty to keep it.', 'hibira-live-chat' ) : 'lcid_…' ) . '">';
 			/* translators: %s: link to the Live Chat widget settings */
-			echo '<p class="description">' . sprintf( esc_html__( 'Create it under Verified visitors in %s. Type - and save to remove it.', 'hibira-live-chat' ), '<a href="' . esc_url( $host . '/portal/widget' ) . '" target="_blank" rel="noopener">' . esc_html__( 'Settings › Widget', 'hibira-live-chat' ) . '</a>' ) . '</p></td></tr>';
+			echo '<p class="description">' . sprintf( esc_html__( 'Create it under Verified visitors in %s. Type - and save to remove it.', 'hibira-live-chat' ), '<a href="' . esc_url( Hibira_LC::page( '/portal/widget' ) ) . '" target="_blank" rel="noopener">' . esc_html__( 'Settings › Widget', 'hibira-live-chat' ) . '</a>' ) . '</p></td></tr>';
 		}
 		self::checkbox( 'share_profile', 'yes', __( 'Name and email', 'hibira-live-chat' ), __( 'Show the customer\'s name and email to your team in the inbox', 'hibira-live-chat' ) );
 		echo '</table>';
