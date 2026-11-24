@@ -1,5 +1,10 @@
 # Hibira Live Chat for WordPress
 
+[![WordPress.org](https://img.shields.io/wordpress/plugin/v/hibira-live-chat?label=wordpress.org)](https://wordpress.org/plugins/hibira-live-chat/)
+
+Install it from WordPress.org: **[wordpress.org/plugins/hibira-live-chat](https://wordpress.org/plugins/hibira-live-chat/)**
+(wp-admin › Plugins › Add New › search "Hibira Live Chat").
+
 A chat bubble on every page of a WordPress site, connected to a
 [Hibira Live Chat](https://chat.hibira.io/?utm_source=github&utm_medium=readme&utm_campaign=live-chat)
 workspace: AI answers from the business's help articles, translation both
@@ -64,3 +69,5 @@ WordPress 的 Hibira Live Chat 外掛，給網站與商店老闆用：在後台�
 不用複製任何程式碼。沒有 https 的網站可以改貼工作區 ID。可設定是否顯示、右下角圓形按鈕、對已登入的編輯/管理員隱藏、
 顏色、跟隨網站語言或訪客瀏覽器語言；填入身分密鑰（lcid_…）後，已登入的會員會以驗證身分出現在收件匣（Starter 方案以上）。
 短代碼 `[hibira_live_chat]` 與連到 `#hibira-live-chat` 的選單項目都能打開對話。這是獨立外掛，與 Hibira Realtime 外掛分開。
+
+已在 WordPress.org 上架：https://wordpress.org/plugins/hibira-live-chat/
